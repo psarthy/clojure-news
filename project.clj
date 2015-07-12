@@ -17,6 +17,6 @@
                  [clj-http "1.0.1"]
 		 [com.draines/postal "1.11.3"]
 		 ]
-  :source-paths ["."]
-;:main clojure-news.index   
+  ;:source-paths ["."]
+:main clojure-news.index   
 )

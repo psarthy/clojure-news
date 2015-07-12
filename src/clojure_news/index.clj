@@ -19,16 +19,8 @@
 
 (import [java.net URL])
 (import [java.io File])
-;(:gen-class)
+(:gen-class)
 )
-
-
-;(count urls)
-
-;(def data_ (io2/read-dataset "/Users/doubleviolin/Documents/R_files/edgar/data/t_.csv" :header true))
-
-
-
 
 
 
@@ -80,11 +72,6 @@
 
 
 
-(defn filter-merger-news
-[titles]
-(filter #(re-find #"[Aa]cqui|[Bb]uy|strateg|[mM]erge|[Tt]akeover|[Ss]ale" %) titles
-) 
-)
 
 (defn find-company-url
 [company-name]
@@ -115,25 +102,16 @@
 
 )
 
-(defn find-company-news2
-[company-name]
-(conj (filter #(re-find #"[Aa]cqui|[Bb]uyout|strateg|[mM]erge|[Tt]akeover|[Ss]ale|[Rr]umor|[Ee]xplores [Ss]ale|mulling purchase|trying to buy" %) 
-
-(map extract-text (map :content (get-index-titles (get-html (find-company-url company-name)))))
-
-) company-name)
-)
 
 
-(defn find-company-news3
+
+;;delete
+(defn find-company-news4
 [company-name]
 (println company-name)
-(filter #(re-find #"[Aa]cqui|[Bb]uyout|[Ss]trategic|[mM]erge|[Tt]akeover|[Pp]otential [Ss]ale|[Pp]otential [Bb]uyers" %) 
-
 (map extract-text (map :content (get-index-titles (get-html (find-company-url company-name)))))
 
-) )
-
+ )
 
 
 
@@ -155,15 +133,15 @@
 
 
 
-   (def data_ (io2/read-dataset "/Users/doubleviolin/clojure/clojure-download2/data/list_.csv" :header true))
+  
 
-   (def url "http://news.google.com/news?q=humana&output=rss")
+  
+
+(defn -main [& args]
 
 
-   (def companies (incanter$/$ :NewsName data_))
-   (println companies)
-   (def companies ["HUMANA" "BROADCOM" "APPLE" "KAGGLE"])
-   (def output (doall (map find-company-news3 companies)))
+   (def companies ["TWITTER" "BROADCOM" "APPLE" "KAGGLE"])
+   (def output (doall (map find-company-news4 companies)))
 
 
    (def output3 (filter #(not= 0 (count %)) output  ))
@@ -173,18 +151,23 @@
    (println output4)
    
 
-   (postal/send-message {:host "smtp.gmail.com"
-                         :user "p.parthasarathy"
-                         :pass "Musiri123"
-                         :ssl :yes!!!11}
-                        {:from "papa"
-                         :to "puru.part@gmail.com"
-                         :subject "News Today"
-                         :body output4})
+
+(comment   (postal/send-message {:host "smtp.gmail.com"
+                          :user "username"
+                          :pass "password"
+                          :ssl :yes!!!11}
+                         {:from "News"
+                          :to "john.doe@gmail.com"
+                          :subject "News Today"
+                          :body output4}))
 
 
 ;
 
+)
+  
+  
 
 
-; filter for caompanies greater than 200 million on listed exchanges
+
+
